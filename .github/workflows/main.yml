@@ -9,6 +9,8 @@ jobs:
     steps:
     - name: Checkout Repo
       uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
 
     - name: Setup Node.js
       uses: actions/setup-node@v2
@@ -23,7 +25,27 @@ jobs:
     - name: Build
       run: npm run build
 
-    - name: Release
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18.18.0'
+        cache: 'npm'
+        registry-url: 'https://registry.npmjs.org'
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Semantic Release
       run: npx semantic-release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
