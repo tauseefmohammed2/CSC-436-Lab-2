@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import UserBar from './UserBar.js';
 import CreateTodo from './CreateTodo';
 import TodoList from './TodoList';
+import UserBar from './UserNavBar';
 
 export default function App() {
     const [user, setUser] = useState(null);
