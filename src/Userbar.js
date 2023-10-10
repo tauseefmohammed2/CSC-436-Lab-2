@@ -1,17 +1,17 @@
-import Login from './Login'
-import Logout from './Logout'
-import Register from './Register'
+import React from 'react';
+import Login from './Login';
+import Logout from './Logout';
+import Register from './Register';
 
-export default function UserBar() {
-    const user = ''
-    if (user) { return <Logout user={user} /> } 
-    
-    else {
+export default function UserBar({ user, onLogin, onLogout }) {
+    if (user) {
+        return <Logout user={user} onLogout={onLogout} />;
+    } else {
         return (
             <>
-              <Login />
-              <Register />
+                <Login onLogin={onLogin} />
+                <Register />
             </>
-        )
+        );
     }
 }
